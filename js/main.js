@@ -11,13 +11,13 @@ window.onload = function () {
     addBookBtn.onclick = processBook;
 };
 function processBook() {
-    alert("ProcessBook was called");
     let userBook = getBook();
     if (userBook != null) {
         addBook(userBook);
     }
 }
 function getBook() {
+    clearAllErrorMessages();
     let isbnTextBox = document.querySelector("#isbn");
     let titleTextBox = document.querySelector("#title");
     let priceTextBox = document.querySelector("#price");
@@ -51,4 +51,11 @@ function isValidIsnb(data) {
     return regex.test(data);
 }
 function addBook(b) {
+}
+function clearAllErrorMessages() {
+    let allSpans = document.querySelectorAll("form span.error_msg");
+    for (let i = 0; i < allSpans.length; i++) {
+        let currentSpan = allSpans[i];
+        currentSpan.textContent = "";
+    }
 }

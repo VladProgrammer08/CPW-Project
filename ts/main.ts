@@ -42,7 +42,7 @@ window.onload = function() {
 }
 
 function processBook(){
-    alert("ProcessBook was called")
+    
 
     let userBook = getBook();
     if (userBook != null) {
@@ -58,6 +58,8 @@ function processBook(){
  * 
  */
 function getBook():Book {
+    clearAllErrorMessages();
+    
     // gett all inputs
     let isbnTextBox = document.querySelector("#isbn") as HTMLInputElement;
     let titleTextBox = document.querySelector("#title") as HTMLInputElement;
@@ -111,4 +113,19 @@ function isValidIsnb(data:string) {
  */
 function addBook(b:Book):void {
 
+}
+
+/**
+ * Cleares all the validation error messages spans
+ * in the form
+ */
+function clearAllErrorMessages() {
+    // Get all error spans
+    let allSpans = document.querySelectorAll("form span.error_msg");
+
+    // Loop through, and set eash span to an empty string
+    for (let i = 0; i < allSpans.length; i++) {
+        let currentSpan = allSpans[i];
+        currentSpan.textContent = "";
+    }
 }
