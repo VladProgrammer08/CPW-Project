@@ -88,6 +88,14 @@ function getBook():Book {
         isValidData = false;
         priceTextBox.nextElementSibling.textContent = "Price must be a positive number"
     }
+
+    // Validaate Release Date
+    let releaseDate = releaseDateTextBox.value;
+    let releaseDateCheck = Date.parse(releaseDate); // IF invalid, tis will return NaN
+    if (isNaN(releaseDateCheck)) {
+        isValidData = false;
+        releaseDateTextBox.nextElementSibling.textContent = "Release date must be a valid date";
+    }
     
 }
 
