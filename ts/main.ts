@@ -53,11 +53,32 @@ function processBook(){
  * This function will retrieve all the book data 
  * from the HTML page. If al data is valid a Book 
  * object will be returned. If any data is invalid, 
- * null wil be returned
+ * null wil be returned ana error messages will be 
+ * shown on the web page
  * 
  */
 function getBook():Book {
+    // gett all inputs
+    let isbnTextBox = document.querySelector("#isbn") as HTMLInputElement;
+    let titleTextBox = document.querySelector("#title") as HTMLInputElement;
+    let priceTextBOx = document.querySelector("#price") as HTMLInputElement;
+    let releaseDateTextBox = document.querySelector("#release_date") as HTMLInputElement;
+
+    //Validate data
+    let isValidData:boolean = true;
+
+    // Validate the ISBN
+    let isbn:string = isbnTextBox.value;
+    if(!isValidIsnb(isbn)) {
+        isValidData = false;
+        isbnTextBox.nextElementSibling.textContent = "ISBM must be 13 digits only";
+    }
     
+}
+
+function isValidIsnb(data:string) {
+    let regex = /^\d){13}$/;
+    return regex.test(data);
 }
 
 /**
