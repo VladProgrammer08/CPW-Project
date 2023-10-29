@@ -61,10 +61,10 @@ function getBook():Book {
     // gett all inputs
     let isbnTextBox = document.querySelector("#isbn") as HTMLInputElement;
     let titleTextBox = document.querySelector("#title") as HTMLInputElement;
-    let priceTextBOx = document.querySelector("#price") as HTMLInputElement;
+    let priceTextBox = document.querySelector("#price") as HTMLInputElement;
     let releaseDateTextBox = document.querySelector("#release_date") as HTMLInputElement;
 
-    //Validate data
+    // Validate data
     let isValidData:boolean = true;
 
     // Validate the ISBN
@@ -73,11 +73,26 @@ function getBook():Book {
         isValidData = false;
         isbnTextBox.nextElementSibling.textContent = "ISBM must be 13 digits only";
     }
+    // Validate title
+    let title:string = titleTextBox.value;
+    if (title.trim() == "") {
+        isValidData = false;
+        let titleErrorSpan = titleTextBox.nextElementSibling;
+        titleErrorSpan.textContent = "You must provide a title"
+
+    }
+
+    //Validate a price
+    let price = parseFloat(priceTextBox.value);
+    if (isNaN(price) || price < 0) {
+        isValidData = false;
+        priceTextBox.nextElementSibling.textContent = "Price must be a positive number"
+    }
     
 }
 
 function isValidIsnb(data:string) {
-    let regex = /^\d){13}$/;
+    let regex = /^\d{13}$/;
     return regex.test(data);
 }
 

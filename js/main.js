@@ -20,7 +20,7 @@ function processBook() {
 function getBook() {
     let isbnTextBox = document.querySelector("#isbn");
     let titleTextBox = document.querySelector("#title");
-    let priceTextBOx = document.querySelector("#price");
+    let priceTextBox = document.querySelector("#price");
     let releaseDateTextBox = document.querySelector("#release_date");
     let isValidData = true;
     let isbn = isbnTextBox.value;
@@ -28,9 +28,20 @@ function getBook() {
         isValidData = false;
         isbnTextBox.nextElementSibling.textContent = "ISBM must be 13 digits only";
     }
+    let title = titleTextBox.value;
+    if (title.trim() == "") {
+        isValidData = false;
+        let titleErrorSpan = titleTextBox.nextElementSibling;
+        titleErrorSpan.textContent = "You must provide a title";
+    }
+    let price = parseFloat(priceTextBox.value);
+    if (isNaN(price) || price < 0) {
+        isValidData = false;
+        priceTextBox.nextElementSibling.textContent = "Price must be a positive number";
+    }
 }
 function isValidIsnb(data) {
-    let regex = /^\d){13}$/;
+    let regex = /^\d{13}$/;
     return regex.test(data);
 }
 function addBook(b) {
